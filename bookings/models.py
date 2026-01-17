@@ -19,6 +19,14 @@ class Availability(models.Model):
     end_time = models.TimeField()
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["service", "date", "start_time", "end_time"],
+                name="uniq_service_date_time_slot",
+            )
+        ]
+
     def __str__(self):
         return f"{self.service.name} | {self.date} {self.start_time}-{self.end_time}"
 
@@ -29,9 +37,13 @@ class Booking(models.Model):
         ('CANCELED', 'Canceled'),
     )
 
+    date = models.DateField(null=True, blank=True)
+    start_time = models.TimeField(null=True, blank=True)
+    end_time = models.TimeField(null=True, blank=True)
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    availability = models.ForeignKey(Availability, on_delete=models.CASCADE)
+    availability = models.OneToOneField(Availability,on_delete=models.PROTECT,null=True,blank=True,related_name="booking")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
     notes = models.TextField(blank=True)
 
