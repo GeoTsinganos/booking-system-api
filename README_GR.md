@@ -61,17 +61,17 @@
 
 ## 📂 Δομή Project
 
-booking_system/
-├── bookings/
-│ ├── models.py
-│ ├── serializers.py
-│ ├── views.py
-│ └── urls.py
-├── booking_system/
-│ ├── settings.py
-│ ├── urls.py
-│ └── ...
-└── manage.py
+1. [] booking_system/
+2. [] ├── bookings/
+3. [] │ ├── models.py
+4. [] │ ├── serializers.py
+5. [] │ ├── views.py
+6. [] │ └── urls.py
+7. [] ├── booking_system/
+8. [] │ ├── settings.py
+9. [] │ ├── urls.py
+10. [] │ └── ...
+11. [] └── manage.py
 
 ---
 
