@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ======================================================
 SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-unsafe") # local fallback ok
 
-DEBUG = os.getenv("DEBUG", "True").lower() == "true"
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if h.strip()]
 
@@ -175,3 +175,7 @@ if DEBUG:
 
 
 CORS_ALLOW_CREDENTIALS = True
+
+csrf_env = os.getenv("CSRF_TRUSTED_ORIGINS", "")
+if csrf_env:
+    CSRF_TRUSTED_ORIGINS = [o.strip() for o in csrf_env.split(",") if o.strip()]
